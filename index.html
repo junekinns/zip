@@ -1,43 +1,56 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Test</title>
+    <meta charset="utf-8" />
+    <script src="./kakao.js"></script>
+  </head>
 
-<head>
-  <title>Test</title>
-  <meta charset="utf-8"/>
-  <script src="./kakao.js"></script>
-</head>
+  <body>
+    <script>
+      const token = "94573e3a39baaf1c9537ec18a1d000ebee14ceb2";
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `token ${token}`);
 
-<body>
-  <script>
-    const token = '94573e3a39baaf1c9537ec18a1d000ebee14ceb2';
-    Kakao.init('e94cc386c6fc9779dc9a471bd5e2a730');
-    Kakao.Auth.login({
-      success: function(response) {
-       Kakao.API.request({
-         url: '/v2/user/me',
-         success: function(response) {
-           let nickname = response['properties']['nickname'];
-           Kakao.Link.sendCustom({
-             templateId: 48998,
-             templateArgs: {
-               'title': nickname + '님이 선물과 메세지를 보냈습니다.',
-               'height':'450',
-               'width':'600',
-               'img_url':'https://raw.githubusercontent.com/rlawns324/gift/main/imgs/h.png?token=AGZWJMDYJWKV2445G4FTS23AJYO74',
-               'btn_url':'jv8qkn4FZKc?t=3',
-              }
-            });
-         },
-         fail: function(error) {
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+
+      Kakao.init("e94cc386c6fc9779dc9a471bd5e2a730");
+      Kakao.Auth.login({
+        success: function (response) {
+          Kakao.API.request({
+            url: "/v2/user/me",
+            success: function (response) {
+              let nickname = response["properties"]["nickname"];
+              Kakao.Link.sendCustom({
+                templateId: 48998,
+                templateArgs: {
+                  title: nickname + "님이 선물과 메세지를 보냈습니다.",
+                  height: "450",
+                  width: "600",
+                  img_url: fetch(
+                    "https://api.github.com/repos/rlawns324/gift/contents/imgs/h.png",
+                    requestOptions
+                  )
+                    .then((response) => response.json())
+                    .then((json) => json.download_url)
+                    .catch((error) => console.log("error", error)),
+                  btn_url: "jv8qkn4FZKc?t=3",
+                },
+              });
+            },
+            fail: function (error) {
+              console.log(error);
+            },
+          });
+        },
+        fail: function (error) {
           console.log(error);
-         }
-        });
-      },
-      fail: function(error) {
-        console.log(error);
-      },
-    });
-  </script>
-</body>
-
+        },
+      });
+    </script>
+  </body>
 </html>
