@@ -9,6 +9,8 @@
 
 <body>
   <script>
+    const testImgPath = './imgs/m.png';
+    console.log(testImgPath);
     Kakao.init('e94cc386c6fc9779dc9a471bd5e2a730');
     Kakao.Auth.login({
       success: function(response) {
@@ -22,7 +24,7 @@
                'title': nickname + '님이 선물과 메세지를 보냈습니다.',
                'height':'450',
                'width':'600',
-               'img_path' : './imgs/m.png',
+               'img_path' : testImgPath,
                'btn_url':'jv8qkn4FZKc?t=3',
               }
             });
