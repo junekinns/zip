@@ -1,2 +1,2 @@
 # gift
-!(test)[imgs/m.png]
+![test](./imgs/m.png)
