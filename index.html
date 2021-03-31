@@ -8,23 +8,22 @@
 
   <body>
     <script>
-      const imgPath = 'p.png';
+      const imgPath = 'gift.png';
       Kakao.init("e94cc386c6fc9779dc9a471bd5e2a730");
       Kakao.Auth.login({
         success: function (response) {
           Kakao.API.request({
             url: "/v2/user/me",
             success: function (response) {
-              let nickname = response["properties"]["nickname"];
               Kakao.Link.sendCustom({
                 templateId: 48998,
                 templateArgs: {
-                  title: nickname + "님이 선물과 메세지를 보냈습니다.",
+                  title: "님이 선물과 메세지를 보냈습니다.",
                   height: "450",
                   width: "600",
-                  img_url: `https://github.com/rlawns324/gift/blob/main/imgs/${imgPath}?raw=true`,
-                  btn_url1: "product/728482?input_channel_id=2630",
-                  btn_url2: "p/60646ccef6d85031edd92b450cs"
+                  img_url: `https://github.com/rlawns324/gift/blob/main/${imgPath}?raw=true`,
+                  btn_mobile: "28533936/113153015-a610a300-9271-11eb-95b7-89e34371bb0d.png",
+                  btn_web: "product/728482?input_channel_id=2630"
                 },
               });
             },
