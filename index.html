@@ -15,6 +15,7 @@
           Kakao.API.request({
             url: "/v2/user/me",
             success: function (response) {
+              let nickname = response["properties"]["nickname"];
               Kakao.Link.sendCustom({
                 templateId: 48998,
                 templateArgs: {
